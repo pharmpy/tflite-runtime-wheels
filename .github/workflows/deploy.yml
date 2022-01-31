@@ -29,7 +29,8 @@ jobs:
         repository: tensorflow/tensorflow
     - name: Build wheel
       run: PYTHON=python{{ $matrix.python-version }} tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh native
-      with: matrix.python-version
+      with:
+        python-version: ${{ matrix.python-version }}
       shell: bash
     - name: Upload artifact
       uses: actions/upload-artifact@v2
