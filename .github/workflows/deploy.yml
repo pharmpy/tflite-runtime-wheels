@@ -1,0 +1,29 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+
+jobs:
+  ci:
+    name: build-ci
+    runs-on: ${{ matrix.platform }}
+    strategy:
+      matrix:
+        platform: [ubuntu-latest, macos-latest]     # Not yet: , windows-latest]
+        python-version: ['3.8', '3.9', '3.10']
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Clone tensorflow 
+      uses: actions/checkout@master
+      with:
+        name: tensorflow/tensorflow
+    - name: Build wheel
+      run: PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
