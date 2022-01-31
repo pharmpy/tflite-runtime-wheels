@@ -31,7 +31,7 @@ jobs:
       run: | 
         # export PYTHON_BIN_PATH=$(python -c "import sys;s=sys.executable;print(s.replace('\\', r'\\'))")
         #tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
-        build_pip_package_with_cmake.sh native
+        tflite-runtime-wheels/build_pip_package_with_cmake.sh native
       shell: bash
     - name: Upload artifact
       uses: actions/upload-artifact@v2
