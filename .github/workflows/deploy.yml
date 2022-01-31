@@ -31,7 +31,7 @@ jobs:
       run: tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh native
       shell: bash
       env:
-        PYTHON_BIN_PATH=python${{matrix.python-version}}
+        PYTHON_BIN_PATH: python${{matrix.python-version}}
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
