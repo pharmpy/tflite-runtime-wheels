@@ -17,6 +17,8 @@ jobs:
         python-version: ['3.8'] #['3.8', '3.9', '3.10']
     steps:
     - uses: actions/checkout@v1
+      with:
+        path: tflite-runtime-wheels
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
