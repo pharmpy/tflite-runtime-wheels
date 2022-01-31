@@ -24,6 +24,6 @@ jobs:
     - name: Clone tensorflow 
       uses: actions/checkout@master
       with:
-        name: tensorflow/tensorflow
+        repository: tensorflow/tensorflow
     - name: Build wheel
       run: PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
