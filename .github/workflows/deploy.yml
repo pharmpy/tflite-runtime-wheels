@@ -28,4 +28,4 @@ jobs:
       with:
         repository: tensorflow/tensorflow
     - name: Build wheel
-      run: PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
+      run: PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh native
