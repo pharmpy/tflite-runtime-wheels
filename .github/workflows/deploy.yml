@@ -28,7 +28,7 @@ jobs:
       with:
         repository: tensorflow/tensorflow
     - name: Build wheel
-      run: PYTHON=python tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh native
+      run: tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh native
       shell: bash
     - name: Upload artifact
       uses: actions/upload-artifact@v2
@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Download artifacts
-      uses: action/download-artifact@v2
+      uses: actions/download-artifact@v2
     - name: Prepare upload
       run: |
         mkdir upload
