@@ -13,8 +13,8 @@ jobs:
     runs-on: ${{ matrix.platform }}
     strategy:
       matrix:
-        platform: [windows-latest] #[ubuntu-latest, macos-latest]     # Not yet: , windows-latest]
-        python-version: ['3.9']  #['3.8', '3.9', '3.10']
+        platform: [ubuntu-latest, macos-latest]     # Not yet: , windows-latest]
+        python-version: ['3.8', '3.9', '3.10']
     steps:
     - uses: actions/checkout@v1
     - name: Set up Python ${{ matrix.python-version }}
@@ -34,7 +34,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: wheel-${{ matrix.platform }}-${{ matrix.python-version }}
-        path: tensorflow/tensorflow/lite/tools/pip_package/gen/tflite_pip/python3/dist/*.whl
+        path: tensorflow/lite/tools/pip_package/gen/tflite_pip/python3/dist/*.whl
 
   upload-wheels:
     needs: build-wheels
