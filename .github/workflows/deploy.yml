@@ -22,7 +22,7 @@ jobs:
       with:
         python-version: ${{ matrix.python-version }}
     - name: Install python dependencies
-      run: pip install numpy pybind11
+      run: pip install numpy pybind11 wheel
     - name: Clone tensorflow 
       uses: actions/checkout@master
       with:
