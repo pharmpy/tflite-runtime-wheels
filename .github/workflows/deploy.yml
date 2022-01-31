@@ -8,8 +8,8 @@ on:
 
 
 jobs:
-  ci:
-    name: build-ci
+  build-wheels:
+    name: build-wheels
     runs-on: ${{ matrix.platform }}
     strategy:
       matrix:
@@ -29,3 +29,21 @@ jobs:
         repository: tensorflow/tensorflow
     - name: Build wheel
       run: PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh native
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: wheel-${{ matrix.platform }}-${{ matrix.python-version }}
+        path: tensorflow/tensorflow/lite/tools/pip_package/gen/tflite_pip/python3/dist/*.whl
+
+  upload-wheels:
+    needs: build-wheels
+    name: upload-wheels
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download artifacts
+      uses: action/download-artifact@v2
+    - name: Prepare upload
+      run: |
+        mkdir upload
+        find . -name '*.whl' | xargs cp -t upload/
+        ls -lR
