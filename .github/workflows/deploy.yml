@@ -34,6 +34,8 @@ jobs:
         export PYTHON_BIN_PATH=/c/hostedtoolcache/windows/Python/3.8.10/x64/python.exe  #${pythonLocation}\\python.exe
         echo $PYTHON_BIN_PATH
         echo $PATH
+        export CC=gcc
+        export CXX=g++
         #echo 'with open("tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh", "r") as sh:' >script.py
         #echo '    a = sh.readlines()' >>script.py
         #echo 'i = a.index("  native)\n")' >>script.py
