@@ -32,6 +32,8 @@ jobs:
       uses: actions/checkout@v2
       with:
         path: this
+    - name: debug
+      uses: mxschmitt/action-tmate@v3
     - name: Build wheel
       run: | 
         #python -c "import sys;s=sys.executable;print(s)"
