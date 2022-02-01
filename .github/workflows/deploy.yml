@@ -37,9 +37,9 @@ jobs:
     - name: Build wheel
       run: | 
         #python -c "import sys;s=sys.executable;print(s)"
-        export PYTHON_BIN_PATH=/c/hostedtoolcache/windows/Python/3.8.10/x64/python.exe  #${pythonLocation}\\python.exe
-        echo $PYTHON_BIN_PATH
-        echo $PATH
+        #export PYTHON_BIN_PATH=/c/hostedtoolcache/windows/Python/3.8.10/x64/python.exe  #${pythonLocation}\\python.exe
+        #echo $PYTHON_BIN_PATH
+        #echo $PATH
         #echo 'with open("tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh", "r") as sh:' >script.py
         #echo '    a = sh.readlines()' >>script.py
         #echo 'i = a.index("  native)\n")' >>script.py
@@ -49,10 +49,11 @@ jobs:
         #echo '   dh.writelines(a)' >>script.py 
         #python script.py
         #cp tempfile tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh
-        ls -l
-        ls this -l
-        cp this/build_pip_package_with_bazel.sh tensorflow/tensorflow/lite/tools/pip_package
-        cd tensorflow; tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
+        #ls -l
+        #ls this -l
+        #cp this/build_pip_package_with_bazel.sh tensorflow/tensorflow/lite/tools/pip_package
+        #cd tensorflow; tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
+        cd tensorflow; tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh
       shell: bash
     - name: Upload artifact
       uses: actions/upload-artifact@v2
