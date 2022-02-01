@@ -52,8 +52,8 @@ cp -r "${TENSORFLOW_LITE_DIR}/tools/pip_package/debian" \
       "${BUILD_DIR}"
 cp  "${TENSORFLOW_LITE_DIR}/tools/pip_package/setup_with_binary.py" "${BUILD_DIR}/setup.py"
 cp "${TENSORFLOW_LITE_DIR}/python/interpreter.py" \
-   "${TENSORFLOW_LITE_DIR}/python/metrics/metrics_interface.py" \
-   "${TENSORFLOW_LITE_DIR}/python/metrics/metrics_portable.py" \
+   "${TENSORFLOW_LITE_DIR}/python/metrics_interface.py" \
+   "${TENSORFLOW_LITE_DIR}/python/metrics_portable.py" \
    "${BUILD_DIR}/tflite_runtime"
 echo "__version__ = '${PACKAGE_VERSION}'" >> "${BUILD_DIR}/tflite_runtime/__init__.py"
 echo "__git_version__ = '$(git -C "${TENSORFLOW_DIR}" describe)'" >> "${BUILD_DIR}/tflite_runtime/__init__.py"
@@ -77,8 +77,7 @@ case "${TENSORFLOW_TARGET}" in
     BAZEL_FLAGS="--copt=-O3 --copt=-march=native"
     ;;
   *)
-    BAZEL_FLAGS="--copt=-O3
-      --define tflite_with_xnnpack=false"
+    BAZEL_FLAGS="--copt=-O3"
     ;;
 esac
 
@@ -108,14 +107,12 @@ chmod u+w "${BUILD_DIR}/tflite_runtime/_pywrap_tensorflow_interpreter_wrapper${L
 cd "${BUILD_DIR}"
 case "${TENSORFLOW_TARGET}" in
   armhf)
-    WHEEL_PLATFORM_NAME="${WHEEL_PLATFORM_NAME:-linux-armv7l}"
-    ${PYTHON} setup.py bdist --plat-name=${WHEEL_PLATFORM_NAME} \
-                       bdist_wheel --plat-name=${WHEEL_PLATFORM_NAME}
+    ${PYTHON} setup.py bdist --plat-name=linux-armv7l \
+                       bdist_wheel --plat-name=linux-armv7l
     ;;
   aarch64)
-    WHEEL_PLATFORM_NAME="${WHEEL_PLATFORM_NAME:-linux-aarch64}"
-    ${PYTHON} setup.py bdist --plat-name=${WHEEL_PLATFORM_NAME} \
-                       bdist_wheel --plat-name=${WHEEL_PLATFORM_NAME}
+    ${PYTHON} setup.py bdist --plat-name=linux-aarch64 \
+                       bdist_wheel --plat-name=linux-aarch64
     ;;
   *)
     if [[ -n "${TENSORFLOW_TARGET}" ]] && [[ -n "${TENSORFLOW_TARGET_ARCH}" ]]; then
