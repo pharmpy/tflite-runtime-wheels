@@ -16,10 +16,7 @@ jobs:
         platform: [windows-latest] #[ubuntu-latest, macos-latest, windows-latest]
         python-version: ['3.8'] #['3.8', '3.9', '3.10']
     steps:
-    - uses: actions/checkout@v1
-      with:
-        path: this
-    - name: Set up Python ${{ matrix.python-version }}
+   - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
@@ -30,6 +27,9 @@ jobs:
       with:
         repository: tensorflow/tensorflow
         ref: refs/tags/v2.7.0
+    - uses: actions/checkout@v1
+      with:
+        path: this
     - name: Build wheel
       run: | 
         #python -c "import sys;s=sys.executable;print(s)"
