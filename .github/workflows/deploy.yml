@@ -50,7 +50,7 @@ jobs:
         ls -l
         ls this -l
         cp this/build_pip_package_with_bazel.sh tensorflow/tensorflow/lite/tools/pip_package
-        tensorflow/tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
+        cd tensorflow; tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
       shell: bash
     - name: Upload artifact
       uses: actions/upload-artifact@v2
