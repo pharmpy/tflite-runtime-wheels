@@ -94,7 +94,7 @@ case "${TENSORFLOW_TARGET}" in
     ;;
 esac
 
-bazel ${BAZEL_STARTUP_OPTIONS} build -c opt -s --config=monolithic --config=noaws --config=nogcp --config=nohdfs --config=nonccl \
+CC=gcc CXX=g++ bazel ${BAZEL_STARTUP_OPTIONS} build -c opt -s --config=monolithic --config=noaws --config=nogcp --config=nohdfs --config=nonccl \
   ${BAZEL_FLAGS} ${CUSTOM_BAZEL_FLAGS} //tensorflow/lite/python/interpreter_wrapper:_pywrap_tensorflow_interpreter_wrapper
 cp "${TENSORFLOW_DIR}/bazel-bin/tensorflow/lite/python/interpreter_wrapper/_pywrap_tensorflow_interpreter_wrapper${LIBRARY_EXTENSION}" \
    "${BUILD_DIR}/tflite_runtime"
