@@ -17,8 +17,6 @@ jobs:
         python-version: ['3.8'] #['3.8', '3.9', '3.10']
     steps:
     - uses: actions/checkout@v1
-      with:
-        path: tflite-runtime-wheels
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
@@ -32,8 +30,16 @@ jobs:
     - name: Build wheel
       run: | 
         # export PYTHON_BIN_PATH=$(python -c "import sys;s=sys.executable;print(s.replace('\\', r'\\'))")
-        #tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
-        tflite-runtime-wheels/build_pip_package_with_cmake.sh native
+        echo 'with open("tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh", "r") as sh:' >script.py
+        echo '    a = sh.readlines()' >>script.py
+        echo 'i = a.index("  native)\n")' >>script.py
+        echo 'a.insert(i + 3, r"-DCMAKE_C_COMPILER=gcc \")' >>script.py
+        echo 'a.insert(i + 3, r"-DCMAKE_CXX_COMPILER=g++ \")' >>script.py
+        echo 'with open("tempfile", "w") as dh:' >>script.py
+        echo '   dh.writelines(a)' >>script.py 
+        python script.py
+        cp tempfile tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh
+        tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
       shell: bash
     - name: Upload artifact
       uses: actions/upload-artifact@v2
