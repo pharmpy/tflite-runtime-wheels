@@ -30,12 +30,10 @@ jobs:
         ref: refs/tags/v2.7.0
     - name: Build wheel
       run: | 
-        python -c "import sys;s=sys.executable;print(s)"
+        #python -c "import sys;s=sys.executable;print(s)"
         export PYTHON_BIN_PATH=/c/hostedtoolcache/windows/Python/3.8.10/x64/python.exe  #${pythonLocation}\\python.exe
         echo $PYTHON_BIN_PATH
         echo $PATH
-        export CC=gcc
-        export CXX=g++
         #echo 'with open("tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh", "r") as sh:' >script.py
         #echo '    a = sh.readlines()' >>script.py
         #echo 'i = a.index("  native)\n")' >>script.py
@@ -45,6 +43,7 @@ jobs:
         #echo '   dh.writelines(a)' >>script.py 
         #python script.py
         #cp tempfile tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh
+        cp build_pip_package_with_bazel.sh tensorflow/lite/tools/pip_package
         tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
       shell: bash
     - name: Upload artifact
