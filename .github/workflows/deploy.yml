@@ -33,8 +33,8 @@ jobs:
         echo 'with open("tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh", "r") as sh:' >script.py
         echo '    a = sh.readlines()' >>script.py
         echo 'i = a.index("  native)\n")' >>script.py
-        echo 'a.insert(i + 3, r"-DCMAKE_C_COMPILER=gcc \")' >>script.py
-        echo 'a.insert(i + 3, r"-DCMAKE_CXX_COMPILER=g++ \")' >>script.py
+        echo 'a.insert(i + 3, "-DCMAKE_C_COMPILER=gcc \\")' >>script.py
+        echo 'a.insert(i + 3, "-DCMAKE_CXX_COMPILER=g++ \\")' >>script.py
         echo 'with open("tempfile", "w") as dh:' >>script.py
         echo '   dh.writelines(a)' >>script.py 
         python script.py
