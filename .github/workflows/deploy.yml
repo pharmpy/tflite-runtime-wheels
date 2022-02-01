@@ -17,6 +17,8 @@ jobs:
         python-version: ['3.8'] #['3.8', '3.9', '3.10']
     steps:
     - uses: actions/checkout@v1
+      with:
+        path: this
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
@@ -43,7 +45,7 @@ jobs:
         #echo '   dh.writelines(a)' >>script.py 
         #python script.py
         #cp tempfile tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh
-        cp build_pip_package_with_bazel.sh tensorflow/lite/tools/pip_package
+        cp this/build_pip_package_with_bazel.sh tensorflow/lite/tools/pip_package
         tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
       shell: bash
     - name: Upload artifact
