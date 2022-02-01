@@ -32,8 +32,8 @@ jobs:
       uses: actions/checkout@v2
       with:
         path: this
-        #    - name: debug
-        #      uses: mxschmitt/action-tmate@v3
+    - name: debug
+      uses: mxschmitt/action-tmate@v3
     - name: Build wheel
       run: | 
         #python -c "import sys;s=sys.executable;print(s)"
@@ -53,7 +53,7 @@ jobs:
         #ls this -l
         #cp this/build_pip_package_with_bazel.sh tensorflow/tensorflow/lite/tools/pip_package
         #cd tensorflow; tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
-        cd tensorflow; tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh
+        cd tensorflow; tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh windows
       shell: bash
     - name: Upload artifact
       uses: actions/upload-artifact@v2
