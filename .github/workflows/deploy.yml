@@ -47,6 +47,8 @@ jobs:
         #echo '   dh.writelines(a)' >>script.py 
         #python script.py
         #cp tempfile tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh
+        ls -l
+        ls this -l
         cp this/build_pip_package_with_bazel.sh tensorflow/tensorflow/lite/tools/pip_package
         tensorflow/tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
       shell: bash
