@@ -30,17 +30,17 @@ jobs:
         ref: refs/tags/v2.7.0
     - name: Build wheel
       run: | 
-        # export PYTHON_BIN_PATH=$(python -c "import sys;s=sys.executable;print(s.replace('\\', r'\\'))")
-        echo 'with open("tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh", "r") as sh:' >script.py
-        echo '    a = sh.readlines()' >>script.py
-        echo 'i = a.index("  native)\n")' >>script.py
-        echo 'a.insert(i + 3, "-DCMAKE_C_COMPILER=gcc \\")' >>script.py
-        echo 'a.insert(i + 3, "-DCMAKE_CXX_COMPILER=g++ \\")' >>script.py
-        echo 'with open("tempfile", "w") as dh:' >>script.py
-        echo '   dh.writelines(a)' >>script.py 
-        python script.py
-        cp tempfile tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh
-        tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh native
+        export PYTHON_BIN_PATH=$(python -c "import sys;s=sys.executable;print(s.replace('\\', r'\\'))")
+        #echo 'with open("tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh", "r") as sh:' >script.py
+        #echo '    a = sh.readlines()' >>script.py
+        #echo 'i = a.index("  native)\n")' >>script.py
+        #echo 'a.insert(i + 3, "-DCMAKE_C_COMPILER=gcc \\")' >>script.py
+        #echo 'a.insert(i + 3, "-DCMAKE_CXX_COMPILER=g++ \\")' >>script.py
+        #echo 'with open("tempfile", "w") as dh:' >>script.py
+        #echo '   dh.writelines(a)' >>script.py 
+        #python script.py
+        #cp tempfile tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh
+        tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh native
       shell: bash
     - name: Upload artifact
       uses: actions/upload-artifact@v2
