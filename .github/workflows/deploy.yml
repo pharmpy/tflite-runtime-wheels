@@ -27,6 +27,7 @@ jobs:
       uses: actions/checkout@master
       with:
         repository: tensorflow/tensorflow
+        ref: refs/tags/v2.7.0
     - name: Build wheel
       run: | 
         # export PYTHON_BIN_PATH=$(python -c "import sys;s=sys.executable;print(s.replace('\\', r'\\'))")
