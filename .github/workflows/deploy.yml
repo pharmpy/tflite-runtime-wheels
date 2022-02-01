@@ -31,6 +31,8 @@ jobs:
     - name: Build wheel
       run: | 
         export PYTHON_BIN_PATH=$(python -c "import sys;s=sys.executable;print(s.replace('\\', r'\\'))")
+        echo $PYTHON_BIN_PATH
+        echo $PATH
         #echo 'with open("tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh", "r") as sh:' >script.py
         #echo '    a = sh.readlines()' >>script.py
         #echo 'i = a.index("  native)\n")' >>script.py
