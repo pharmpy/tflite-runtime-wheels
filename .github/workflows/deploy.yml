@@ -23,13 +23,13 @@ jobs:
     - name: Install python dependencies
       run: pip install numpy pybind11 wheel
     - name: Clone tensorflow 
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
       with:
         repository: tensorflow/tensorflow
         ref: refs/tags/v2.7.0
         path: tensorflow
     - name: Clone repo
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
       with:
         path: this
     - name: Build wheel
