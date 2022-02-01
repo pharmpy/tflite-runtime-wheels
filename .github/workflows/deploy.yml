@@ -43,7 +43,7 @@ jobs:
         #echo '   dh.writelines(a)' >>script.py 
         #python script.py
         #cp tempfile tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh
-        tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh native
+        tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
       shell: bash
     - name: Upload artifact
       uses: actions/upload-artifact@v2
