@@ -32,7 +32,7 @@ jobs:
       run: |
         echo $PATH
         echo 'import os' > path.py
-        echo 'path = os.getenv("PATH")' >> path.py
+        echo 'path = os.popen("echo $PATH").read()' >> path.py
         echo 'a = path.split(":")' >> path.py
         echo 'found = False' >> path.py
         echo 'keep = []' >> path.py
