@@ -48,7 +48,6 @@ jobs:
         #export PATH=`python path.py`
         export PATH=/mingw64/bin:/usr/bin:/c/Users/runneradmin/bin:/c/Users/runneradmin/AppData/Roaming/Python/Python310/Scripts:/c/hostedtoolcache/windows/Python/3.10.11/x64/Scripts:/c/hostedtoolcache/windows/Python/3.10.11/x64:/bin:/c/Windows/system32:/c/Windows:/cmd:/mingw64/bin:/usr/bin
         echo $PATH
-        rm /c/hostedtoolcache/windows/Python/3.9.13/python.exe
         . tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
       shell: bash
     - name: Upload artifact
