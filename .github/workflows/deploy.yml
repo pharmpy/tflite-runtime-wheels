@@ -30,6 +30,7 @@ jobs:
         ref: refs/tags/v2.12.0
     - name: Build wheel
       run: |
+        echo $PATH
         echo 'import os' > path.py
         echo 'path = os.getenv("PATH")' >> path.py
         echo 'a = path.split(":")' >> path.py
