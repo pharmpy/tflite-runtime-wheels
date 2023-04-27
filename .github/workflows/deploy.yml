@@ -30,7 +30,7 @@ jobs:
         ref: refs/tags/v2.12.0
     - name: Build wheel
       run: |
-        tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
+        PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
       shell: bash
     - name: Upload artifact
       uses: actions/upload-artifact@v2
