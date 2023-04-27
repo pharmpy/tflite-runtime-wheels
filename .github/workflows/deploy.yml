@@ -14,8 +14,8 @@ jobs:
     runs-on: ${{ matrix.platform }}
     strategy:
       matrix:
-        platform: [ubuntu-latest, macos-latest, windows-latest]
-        python-version: ['3.9', '3.10', '3.11']
+        platform: [windows-latest]
+        python-version: ['3.10']
     steps:
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
@@ -28,6 +28,8 @@ jobs:
       with:
         repository: tensorflow/tensorflow
         ref: refs/tags/v2.12.0
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
     - name: Build wheel
       run: |
         PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
