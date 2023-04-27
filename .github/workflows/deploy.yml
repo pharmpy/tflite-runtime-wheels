@@ -47,7 +47,7 @@ jobs:
         echo 'print(";".join(keep))' >> path.py
         #export PATH=`python path.py`
         #echo $PATH
-        sudo rm c/hostedtoolcache/windows/Python/3.9.13/python.exe
+        rm /c/hostedtoolcache/windows/Python/3.9.13/python.exe
         . tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
       shell: bash
     - name: Upload artifact
