@@ -44,7 +44,7 @@ jobs:
         echo '  p.replace("(", "\(").replace(")", "\)").replace(" ", "\ ")' >> path.py
         echo '  keep.append(p)' >> path.py
         echo 'print(":".join(keep))' >> path.py
-        export PATH=$(python3 path.py)
+        export PATH=$(python path.py)
         tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
       shell: bash
     - name: Upload artifact
