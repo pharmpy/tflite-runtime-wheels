@@ -30,9 +30,9 @@ jobs:
         ref: refs/tags/v2.12.0
     - name: Build wheel
       run: |
-        echo $PATH
         echo 'import os' > path.py
-        echo 'path = os.popen("echo $PATH").read()' >> path.py
+        echo 'import sys' >> path.py
+        echo 'path = sys.argv[1]' >> path.py
         echo 'a = path.split(":")' >> path.py
         echo 'found = False' >> path.py
         echo 'keep = []' >> path.py
@@ -46,7 +46,7 @@ jobs:
         echo '  keep.append(p)' >> path.py
         echo '  print("QQ", p)' >> path.py
         echo 'print(":".join(keep))' >> path.py
-        export PATH=$(python path.py)
+        export PATH=`python path.py $PATH`
         echo $PATH
         . tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
       shell: bash
