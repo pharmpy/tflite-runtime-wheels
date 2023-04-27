@@ -32,7 +32,22 @@ jobs:
       uses: mxschmitt/action-tmate@v3
     - name: Build wheel
       run: |
-        PYTHON=python3 tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
+        echo 'import os' > path.py
+        echo 'path = os.getenv("PATH")' >> path.py
+        echo 'a = path.split(':')' >> path.py
+        echo 'found = False' >> path.py
+        echo 'keep = []' >> path.py
+        echo 'for p in a:' >> path.py
+        echo '  if "hostedtoolcache/windows/Python" in p:' >> path.py
+        echo '    if found:' >> path.py
+        echo '      continue' >> path.py
+        echo '    else:' >> path.py
+        echo '      found = True' >> path.py
+        echo '  p.replace("(", "\(").replace(")", "\)").replace(" ", "\ ")' >> path.py
+        echo '  keep.append(p)' >> path.py
+        echo 'print(":".join(keep))' >> path.py
+        export PATH=$(python3 path.py)
+        tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
       shell: bash
     - name: Upload artifact
       uses: actions/upload-artifact@v2
