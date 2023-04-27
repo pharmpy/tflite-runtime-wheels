@@ -44,6 +44,7 @@ jobs:
         echo '      found = True' >> path.py
         echo '  p.replace("(", "\(").replace(")", "\)").replace(" ", "\ ")' >> path.py
         echo '  keep.append(p)' >> path.py
+        echo '  print("QQ", p)' >> path.py
         echo 'print(":".join(keep))' >> path.py
         export PATH=$(python path.py)
         echo $PATH
