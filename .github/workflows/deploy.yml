@@ -31,9 +31,8 @@ jobs:
     - name: Build wheel
       run: |
         echo 'import os' > path.py
-        echo 'import sys' >> path.py
-        echo 'path = sys.argv[1]' >> path.py
-        echo 'a = path.split(":")' >> path.py
+        echo 'path = os.getenv("PATH")' >> path.py
+        echo 'a = path.split(";")' >> path.py
         echo 'found = False' >> path.py
         echo 'keep = []' >> path.py
         echo 'for p in a:' >> path.py
@@ -42,11 +41,11 @@ jobs:
         echo '      continue' >> path.py
         echo '    else:' >> path.py
         echo '      found = True' >> path.py
-        echo '  p.replace("(", "\(").replace(")", "\)").replace(" ", "\ ")' >> path.py
+        echo '  #p.replace("(", "\(").replace(")", "\)").replace(" ", "\ ")' >> path.py
         echo '  keep.append(p)' >> path.py
         echo '  print("QQ", p)' >> path.py
         echo 'print(":".join(keep))' >> path.py
-        export PATH=`python path.py $PATH`
+        export PATH=`python path.py`
         echo $PATH
         . tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
       shell: bash
