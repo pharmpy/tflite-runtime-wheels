@@ -53,7 +53,7 @@ jobs:
         echo '       -DCMAKE_C_FLAGS="${BUILD_FLAGS}" \' >> build.patch
         echo '       -DCMAKE_CXX_FLAGS="${BUILD_FLAGS}" \' >> build.patch
         echo '@@ -122,7 +122,7 @@ case "${TENSORFLOW_TARGET}" in' >> build.patch
-        echo ' ;;' >> build.patch
+        echo '     ;;' >> build.patch
         echo ' esac' >> build.patch
         echo '' >> build.patch
         echo '-cmake --build . --verbose -j ${BUILD_NUM_JOBS} -t _pywrap_tensorflow_interpreter_wrapper' >> build.patch
