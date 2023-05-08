@@ -55,6 +55,9 @@ jobs:
         git apply build.patch
       shell: bash
 
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+
     - name: Build wheel
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
