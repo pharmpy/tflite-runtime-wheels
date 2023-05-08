@@ -28,6 +28,33 @@ jobs:
         python-version: ${{ matrix.python-version }}
     - name: Install python dependencies
       run: pip install numpy pybind11 wheel
+
+    - name: Patch build script
+      run: |
+        echo 'diff --git a/tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh b/tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh' > build.patch
+        echo 'index 7ca118b89f9..cbc465b8239 100755' >> build.patch
+        echo '--- a/tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh' >> build.patch
+        echo '+++ b/tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh' >> build.patch
+        echo '@@ -107,14 +107,14 @@ case "${TENSORFLOW_TARGET}" in' >> build.patch
+        echo '       "${TENSORFLOW_LITE_DIR}"' >> build.patch
+        echo '     ;;' >> build.patch
+        echo '   native)' >> build.patch
+        echo '-    BUILD_FLAGS=${BUILD_FLAGS:-"-march=native -I${PYTHON_INCLUDE} -I${PYBIND11_INCLUDE} -I${NUMPY_INCLUDE}"}' >> build.patch
+        echo '+    BUILD_FLAGS=${BUILD_FLAGS:-"-march=native -I${PYTHON_INCLUDE} -I${PYBIND11_INCLUDE} -I${NUMPY_INCLUDE} -static-libstdc++ -static-libgcc"}' >> build.patch
+        echo '     cmake \' >> build.patch
+        echo '       -DCMAKE_C_FLAGS="${BUILD_FLAGS}" \' >> build.patch
+        echo '       -DCMAKE_CXX_FLAGS="${BUILD_FLAGS}" \' >> build.patch
+        echo '       "${TENSORFLOW_LITE_DIR}"' >> build.patch
+        echo '     ;;' >> build.patch
+        echo '   *)' >> build.patch
+        echo '-    BUILD_FLAGS=${BUILD_FLAGS:-"-I${PYTHON_INCLUDE} -I${PYBIND11_INCLUDE} -I${NUMPY_INCLUDE}"}' >> build.patch
+        echo '+    BUILD_FLAGS=${BUILD_FLAGS:-"-I${PYTHON_INCLUDE} -I${PYBIND11_INCLUDE} -I${NUMPY_INCLUDE} -static-libstdc++ -static-libgcc"}' >> build.patch
+        echo '     cmake \' >> build.patch
+        echo '       -DCMAKE_C_FLAGS="${BUILD_FLAGS}" \' >> build.patch
+        echo '       -DCMAKE_CXX_FLAGS="${BUILD_FLAGS}" \' >> build.patch
+        git apply build.patch
+      shell: bash
+
     - name: Build wheel
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
@@ -44,6 +71,7 @@ jobs:
         fi
         . tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
       shell: bash
+
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
