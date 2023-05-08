@@ -55,9 +55,6 @@ jobs:
         git apply build.patch
       shell: bash
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
-
     - name: Build wheel
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
@@ -72,7 +69,11 @@ jobs:
                 export PATH=/c/Users/runneradmin/AppData/Roaming/Python/Python311/Scripts:/c/hostedtoolcache/windows/Python/3.11.3/x64/Scripts:/c/hostedtoolcache/windows/Python/3.11.3/x64:$PATH
             fi
         fi
-        . tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
+        if [ "$RUNNER_OS" == "Linux" ]; then
+            . tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh
+        else
+            . tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
+        fi
       shell: bash
 
     - name: Upload artifact
