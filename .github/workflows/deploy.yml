@@ -32,7 +32,7 @@ jobs:
     - name: Patch build script
       run: |
         echo 'diff --git a/tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh b/tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh' > build.patch
-        echo 'index 7ca118b89f9..cbc465b8239 100755' >> build.patch
+        echo 'index 7ca118b89f9..10593da6d41 100755' >> build.patch
         echo '--- a/tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh' >> build.patch
         echo '+++ b/tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh' >> build.patch
         echo '@@ -107,14 +107,14 @@ case "${TENSORFLOW_TARGET}" in' >> build.patch
@@ -52,6 +52,13 @@ jobs:
         echo '     cmake \' >> build.patch
         echo '       -DCMAKE_C_FLAGS="${BUILD_FLAGS}" \' >> build.patch
         echo '       -DCMAKE_CXX_FLAGS="${BUILD_FLAGS}" \' >> build.patch
+        echo '@@ -122,7 +122,7 @@ case "${TENSORFLOW_TARGET}" in' >> build.patch
+        echo ' ;;' >> build.patch
+        echo ' esac' >> build.patch
+        echo '' >> build.patch
+        echo '-cmake --build . --verbose -j ${BUILD_NUM_JOBS} -t _pywrap_tensorflow_interpreter_wrapper' >> build.patch
+        echo '+cmake --build . --verbose -j 1 ${BUILD_NUM_JOBS} -t _pywrap_tensorflow_interpreter_wrapper' >> build.patch
+        echo ' cd "${BUILD_DIR}"' >> build.patch
         git apply build.patch
       shell: bash
 
