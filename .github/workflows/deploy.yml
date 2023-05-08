@@ -59,6 +59,8 @@ jobs:
         echo '-cmake --build . --verbose -j ${BUILD_NUM_JOBS} -t _pywrap_tensorflow_interpreter_wrapper' >> build.patch
         echo '+cmake --build . --verbose -j 1 ${BUILD_NUM_JOBS} -t _pywrap_tensorflow_interpreter_wrapper' >> build.patch
         echo ' cd "${BUILD_DIR}"' >> build.patch
+        echo '' >> build.patch
+        echo ' case "${TENSORFLOW_TARGET}" in' >> build.patch
         git apply build.patch
       shell: bash
 
