@@ -15,10 +15,7 @@ jobs:
     strategy:
       matrix:
         platform: [ubuntu-latest, macos-latest]
-        python-version: ['3.9', '3.10', '3.11', '3.12']
-        exclude:
-          - platform: macos-latest
-            python-version: '3.12'
+        python-version: ['3.9', '3.10', '3.11']
     env:
       SYSTEM_VERSION_COMPAT: 0
     steps:
