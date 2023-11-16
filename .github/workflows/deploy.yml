@@ -15,7 +15,7 @@ jobs:
     strategy:
       matrix:
         platform: [ubuntu-latest, macos-latest]
-        python-version: ['3.9', '3.10', '3.11']
+        python-version: ['3.9', '3.10', '3.11', '3.12']
     steps:
     - name: Clone tensorflow 
       uses: actions/checkout@v2
@@ -76,6 +76,9 @@ jobs:
             fi
             if [ "${{ matrix.python-version }}" == "3.11" ]; then
                 export PATH=/c/Users/runneradmin/AppData/Roaming/Python/Python311/Scripts:/c/hostedtoolcache/windows/Python/3.11.3/x64/Scripts:/c/hostedtoolcache/windows/Python/3.11.3/x64:$PATH
+            fi
+            if [ "${{ matrix.python-version }}" == "3.12" ]; then
+                export PATH=/c/Users/runneradmin/AppData/Roaming/Python/Python312/Scripts:/c/hostedtoolcache/windows/Python/3.12.0/x64/Scripts:/c/hostedtoolcache/windows/Python/3.12.0/x64:$PATH
             fi
         fi
         if [ "$RUNNER_OS" == "Linux" ]; then
