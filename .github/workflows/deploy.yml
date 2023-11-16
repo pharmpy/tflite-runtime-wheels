@@ -19,6 +19,8 @@ jobs:
         exclude:
           - platform: macos-latest
             python-version: '3.12'
+    env:
+      SYSTEM_VERSION_COMPAT: 0
     steps:
     - name: Clone tensorflow 
       uses: actions/checkout@v2
