@@ -14,8 +14,11 @@ jobs:
     runs-on: ${{ matrix.platform }}
     strategy:
       matrix:
-        platform: [ubuntu-22.04, macos-11]
+        platform: [ubuntu-22.04, macos-11, windows-2019]
         python-version: ['3.9', '3.10', '3.11', '3.12']
+        exclude:
+          - platform: windows-2019
+            python-version: '3.11'
     env:
       MACOSX_DEPLOYMENT_TARGET: 11.0
       TF_PYTHON_VERSION: ${{ matrix.python-version }}
