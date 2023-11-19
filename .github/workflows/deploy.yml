@@ -89,6 +89,8 @@ jobs:
         fi
         if [ "$RUNNER_OS" == "Linux" ]; then
             . tensorflow/lite/tools/pip_package/build_pip_package_with_cmake.sh
+        elif [ "$RUNNER_OS" == "Windows" ]; then
+            . tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh windows
         else
             . tensorflow/lite/tools/pip_package/build_pip_package_with_bazel.sh
         fi
