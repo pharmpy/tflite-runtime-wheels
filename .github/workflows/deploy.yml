@@ -98,11 +98,11 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: wheel-${{ matrix.platform }}-${{ matrix.python-version }}
-        path: tensorflow/lite/tools/pip_package/gen/tflite_pip/python3/dist/*.whl
+        path: tensorflow/lite/tools/pip_package/gen/tflite_pip/python/dist/*.whl
 
     - name: Test import
       run: |
-        pip install tensorflow/lite/tools/pip_package/gen/tflite_pip/python3/dist/*.whl
+        pip install tensorflow/lite/tools/pip_package/gen/tflite_pip/python/dist/*.whl
         python -c "from tflite_runtime.interpreter import Interpreter"
       shell: bash
 
