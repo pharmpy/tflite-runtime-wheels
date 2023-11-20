@@ -100,6 +100,12 @@ jobs:
         name: wheel-${{ matrix.platform }}-${{ matrix.python-version }}
         path: tensorflow/lite/tools/pip_package/gen/tflite_pip/python3/dist/*.whl
 
+    - name: Test import
+      run: |
+        pip install tensorflow/lite/tools/pip_package/gen/tflite_pip/python3/dist/*.whl
+        python -c "from tflite_runtime.interpreter import Interpreter"
+      shell: bash
+
   upload-wheels:
     needs: build-wheels
     name: upload-wheels
