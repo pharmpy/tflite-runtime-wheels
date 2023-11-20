@@ -19,6 +19,7 @@ jobs:
     env:
       MACOSX_DEPLOYMENT_TARGET: 11.0
       TF_PYTHON_VERSION: ${{ matrix.python-version }}
+      CI_BUILD_PYTHON: python
     steps:
     - name: Clone tensorflow 
       uses: actions/checkout@v2
